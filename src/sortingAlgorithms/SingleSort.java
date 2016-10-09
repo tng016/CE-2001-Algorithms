@@ -12,16 +12,14 @@ public class SingleSort {
 		   private static String[] names = new String[15];
 		   
 		   public static void main(String args[]) {
-			   int i = 1000;
+			   
+			   long start = System.nanoTime();
+			     
+			  
+			   int i = 10000;
 			   
 			   for (int j=0;j<i;j++){
-					   /*try{
-				           a = FileReaderWriter.readFile("2000.txt");
-				        } catch (FileNotFoundException e) {
-				           e.printStackTrace();
-				        } catch (IOException e) {
-				           e.printStackTrace();
-				        }*/
+					   
 				   for (int k=0;k<n;k++){
 				   		a[k] = (int)(Math.random()*n);
 				   }
@@ -37,6 +35,8 @@ public class SingleSort {
 			   }
 
 				   System.out.println(count/i);
+				   long time = System.nanoTime() - start;
+				   System.out.printf("Each run took an average of %,d ns%n", time/i);
 
 		   }
 		   public static void printArray(int n){

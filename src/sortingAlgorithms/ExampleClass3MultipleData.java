@@ -13,39 +13,51 @@ public class ExampleClass3MultipleData {
 	   
 
 	   public static void main(String args[]) {
+		   /*n=2000;
+		   a = new int[n];
+		   a[k]=(int)(Math.random()*n);
+		   b = new int[n];
+		   printArray(n);*/
 		   Scanner sc = new Scanner(System.in);
 		   
 		   System.out.println("How many data points do you want?");
 		   input = sc.nextInt();
 		   
-		   loadNames();
-		   for (int i = 0;i<30;i++){
-			   n = 2000 * (1+ i/6);
-			   if((i/2)%3==1)
-				   for(int k=0;k<n;k++)
-					   a[k]=k;
-			   else if ((i/2)%3==2)
-				   for(int k=0;k<n;k++)
-					   a[k]=n-k;
+		   //for (int i = 0;i<10;i++){
+		   int i = 0;
+			   //System.out.println(i);
+			   n = 2000 * (1 + i/2);
 			   for (int j=0;j<input;j++){
-			   if(1%3==0)
-				   for(int k=0;k<n;k++)
-					   a[k]=(int)Math.random()*n;
-			   b = new int[n];
+				  /* a = new int[n];
+				   b = new int[n];
+				   for(int k=0;k<n;k++){
+					   a[k]=(int)(Math.random()*n);*/
+				   try{
+			           a = FileReaderWriter.readFile("2000.txt");
+			        } catch (FileNotFoundException e) {
+			           e.printStackTrace();
+			        } catch (IOException e) {
+			           e.printStackTrace();
+			        }
+				   
+				   //printArray(n);
 
 			   if (i%2==1){
 				   mergeSort(0,n-1);
-				   count += count;
+				   System.out.println("merging");
+				   //count += count;
 			   }
 				   
 			   else{
 				   quickSort(0,n-1);
-				   count += count;
+				   System.out.println("Quickly");
+				   //count += count;
 			   }
-			   System.out.println(names[i] + " " + count/input);
+			   }
+			   //printArray(n);
+			   System.out.println(i + " average = " + count/input);
 			   count = 0;
-		   }
-		   }
+		   //}
 	   }
 	   public static void printArray(int n){
 			for (int k=0;k<n;k++){
@@ -112,23 +124,5 @@ public class ExampleClass3MultipleData {
 	      a[b] = a[c];
 	      a[c] = temp;
 	   }
-
-	   public static void loadNames(){
-		      names[0] = "2000.txt";
-		      names[1] = "2000Ordered.txt";
-		      names[2] = "2000Reverse.txt";
-		      names[3] = "4000.txt";
-		      names[4] = "4000Ordered.txt";
-		      names[5] = "4000Reverse.txt";
-		      names[6] = "6000.txt";
-		      names[7] = "6000Ordered.txt";
-		      names[8] = "6000Reverse.txt";
-		      names[9] = "8000.txt";
-		      names[10] = "8000Ordered.txt";
-		      names[11] = "8000Reverse.txt";
-		      names[12] = "10000.txt";
-		      names[13] = "10000Ordered.txt";
-		      names[14] = "10000Reverse.txt";
-		   }
 
 	}

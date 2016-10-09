@@ -1,14 +1,21 @@
 package sortingAlgorithms;
 import java.io.*;
-public class ExampleClass3SingleData {
+import java.util.Scanner;
+public class ExampleClass3App {
    private static int count;
-   private static int time;
+   private static long time, totaltime;
    private static int n;
+   private static int rep;
    private static int[] a;
    private static int[] b;
    private static String[] names = new String[15];
 
    public static void main(String args[]) {
+	   
+	   Scanner sc = new Scanner(System.in);
+	   System.out.println("How many repetitions do you want?");
+	   rep = sc.nextInt();
+	   sc.close();
 	   
 	   loadNames();
 	   
@@ -16,26 +23,40 @@ public class ExampleClass3SingleData {
 		   n = 2000 * (1+ i/6);
 		   a = new int[n];
 		   b = new int[n];
-		   try{
-	           a = FileReaderWriter.readFile(names[i/2]);
-	        } catch (FileNotFoundException e) {
-	           e.printStackTrace();
-	        } catch (IOException e) {
-	           e.printStackTrace();
-	        }
-
-		   if (i%2==1){
-			   mergeSort(0,n-1);
-			   System.out.println("# of Comparisions for Mergesort of " + names[i/2] + " = "+ count);
-		   }
+		   
+		   for (int j=0;j<rep;j++){
+			   try{
+		           a = FileReaderWriter.readFile(names[i/2]);
+		        } catch (FileNotFoundException e) {
+		           e.printStackTrace();
+		        } catch (IOException e) {
+		           e.printStackTrace();
+		        }
 			   
-		   else{
-			   quickSort(0,n-1);
-			   System.out.println("# of Comparisions for Quicksort of " + names[i/2] + " = "+ count);
+			   long start = System.nanoTime();
+
+			   if (i%2==1){
+				   mergeSort(0,n-1);
+			   }
+				   
+			   else{
+				   quickSort(0,n-1);
+			   }
+			   
+			   time = System.nanoTime() - start;
+			   totaltime += time;
 		   }
+		   
+		   if (i%2==1)
+			   System.out.println("# of Comparisions for Mergesort of " + names[i/2] + " = "+ count/rep);
+		   else 
+			   System.out.println("# of Comparisions for Quicksort of " + names[i/2] + " = "+ count/rep);
+		   System.out.printf("Each run took an average of %,d ns%n", totaltime/rep);
+		   totaltime = 0;
 		   count = 0;
 	   }
    }
+   
    public static void printArray(int n){
 		for (int k=0;k<n;k++){
 			System.out.println(a[k]);
