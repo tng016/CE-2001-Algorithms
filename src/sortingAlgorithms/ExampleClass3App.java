@@ -17,14 +17,19 @@ public class ExampleClass3App {
 	   rep = sc.nextInt();
 	   sc.close();
 	   
+	   //load the file names into an array
 	   loadNames();
 	   
+	   //i refers to the number sorting tests we are doing 
+	   //(2 types of sort * 3 types of data * 5 data sizes)
 	   for (int i = 0;i<30;i++){
-		   n = 2000 * (1+ i/6);
+		   n = 2000 * (1+ i/6);//obtain data size from i
 		   a = new int[n];
 		   b = new int[n];
 		   
+		   //perform sort (rep) number of times
 		   for (int j=0;j<rep;j++){
+			   //load data set into array a
 			   try{
 		           a = FileReaderWriter.readFile(names[i/2]);
 		        } catch (FileNotFoundException e) {
@@ -33,8 +38,10 @@ public class ExampleClass3App {
 		           e.printStackTrace();
 		        }
 			   
+			   //star stopwatch
 			   long start = System.nanoTime();
-
+			   
+			   //odd i perform mergesort, even perform quicksort
 			   if (i%2==1){
 				   mergeSort(0,n-1);
 			   }
@@ -43,7 +50,10 @@ public class ExampleClass3App {
 				   quickSort(0,n-1);
 			   }
 			   
+			   //stop stopwatch
 			   time = System.nanoTime() - start;
+			   
+			   //add up timings
 			   totaltime += time;
 		   }
 		   
@@ -52,6 +62,7 @@ public class ExampleClass3App {
 		   else 
 			   System.out.println("# of Comparisions for Quicksort of " + names[i/2] + " = "+ count/rep);
 		   System.out.printf("Each run took an average of %,d ns%n", totaltime/rep);
+		   //reset count & time
 		   totaltime = 0;
 		   count = 0;
 	   }
